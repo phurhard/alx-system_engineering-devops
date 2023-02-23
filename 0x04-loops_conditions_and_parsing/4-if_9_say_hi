@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# This scripts prints "Best School" 10 times but at the 9th time it prints "Hi" on a new line before the last "Best School"
+count=1
+while [[ "$count" -le 10 ]]; do
+	echo "Best School"
+	if [[ "$count" -eq 9 ]]; then
+		echo "Hi"
+	fi
+	count=$((count + 1))
+done
