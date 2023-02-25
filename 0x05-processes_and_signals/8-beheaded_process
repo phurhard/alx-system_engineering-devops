@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# This bash script stops 4-infinity_and_beyond without using the kill command
+ps x | pkill -f -SIGKILL highlander 
