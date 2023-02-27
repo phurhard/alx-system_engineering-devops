@@ -1,0 +1,66 @@
+#!/usr/bin/env bash
+# init script that manages manage_my_process
+### BEGIN INIT INFO
+# Provides: manage_my_process
+# Required-Start:    $local_fs $syslog $remote_fs dbus
+# Required-Stop:     $local_fs $syslog $remote_fs
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Start manage_my_process daemons
+### END INIT INFO
+
+
+#    When passing the argument start:
+#        Starts manage_my_process
+#        Creates a file containing its PID in /var/run/my_process.pid
+#        Displays manage_my_process started
+#    When passing the argument stop:
+#        Stops manage_my_process
+#        Deletes the file /var/run/my_process.pid
+#        Displays manage_my_process stopped
+#    When passing the argument restart
+#        Stops manage_my_process
+#        Deletes the file /var/run/my_process.pid
+#        Starts manage_my_process
+#        Creates a file containing its PID in /var/run/my_process.pid
+#        Displays manage_my_process restarted
+#    Displays Usage: manage_my_process {start|stop|restart} if any other argument or no argument is passed
+
+DAEMON=manage_my_process
+
+test -f $DAEMON || echo "file $DAEMON does not exist"
+remove () {
+	rm /var/run/my_process.pid
+}
+create () {
+	echo $$ > /var/run/my_process.pid
+}
+alias process='./manage_my_process'
+set -e
+
+case $1 in
+	start)
+		$process
+		create
+		echo "manage_my_process started"
+		;;
+	stop)
+		if (pgrep -f ./manage_my_process); then
+			pkill -f ./manage_my_process
+		fi
+		remove || echo "File has already been deleted, manage_my_process has stopped already"
+		echo "manage_my_process stopped"
+		;;
+	restart)
+		if (pgrep -f ./manage_my_process); then
+			pkill -f ./manage_my_process
+			remove
+		fi
+		$process
+		create
+		echo "manage_my_process restarted"
+		;;
+	*)
+		echo "Usage: manage_my_process {start|stop|restart}"
+		;;
+esac

@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# This is a sample of a daemon script that prints I am alive to a file
+
+while true; do
+	echo "I am alive" >> /tmp/my_process
+	sleep 2
+done
