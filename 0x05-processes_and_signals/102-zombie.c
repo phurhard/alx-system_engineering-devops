@@ -12,13 +12,13 @@ int main(void)
 	pid_t child_pid;
 
 	child_pid = fork();
-	if (child_pid > 0)
+	if (child_pid == 0)
 	{
-		sleep(60);
+		printf("Zombie process created, PID: %d\n",getpid(childpid));
 	}
 	else
 	{
-		exit(0);
+		sleep(5);
 	}
 	return (0);
 }
