@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# This scripts introduces a new config file, that removes password authetication
+Host *
+	PasswordAuthentication no
+	IdentityFile ~/.ssh/school
+
