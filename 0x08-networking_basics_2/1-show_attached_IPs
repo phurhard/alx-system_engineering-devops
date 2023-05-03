@@ -2,5 +2,5 @@
 # This bash scripts displays all active IPv4 on the machine it is executed on
 ipAddress=$(ip addr show | grep 'inet' | awk '{print $2}')
 for ip in $ipAddress; do
-	echo $ip
+	echo "$ip"
 done
