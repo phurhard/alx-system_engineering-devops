@@ -3,4 +3,3 @@
 sudo sed -i '/listen \[::\]:8080 default_server/ s/8080/80/' /etc/nginx/sites-enabled/default
 sudo sed -i '/listen 8080 default_server/ s/8080/80/' /etc/nginx/sites-enabled/default
 sudo service nginx restart
-pkill -f nginx
