@@ -1,4 +1,7 @@
-#install net-tools if not installed
+#!/usr/bin/env bash
+#configures the server yo emsure its working properly.
+#install nginx
+##install net-tools if not installed
 #sudo apt-get update
 #sudo apt-get install -y net-tools
 
