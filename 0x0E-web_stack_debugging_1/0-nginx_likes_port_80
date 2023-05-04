@@ -13,7 +13,8 @@ if ! netstat -lnp | (grep -q :80 && grep -q nginx) ; then
   echo "Nginx is not listening on port 80"
 
   # Modify Nginx configuration to listen on port 80 for all active ipv4 ips
-  sudo sed -i '/listen \[::\]:8080 default_server/ s/8080/ 80/' /etc/nginx/sites-enabled/default
+  sudo sed -i '/listen \[::\]:8080 default_server/ s/8080/80/' /etc/nginx/sites-enabled/default
+  sudo sed -i '/listen 8080 default_server/ s/8080/80/' /etc/nginx/sites-
   # Restart Nginx service
   sudo service nginx restart
 fi
