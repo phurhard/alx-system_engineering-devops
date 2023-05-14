@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# This script configures the server Nginx to ensure it's working properly on port 80
+
+# Check if Nginx is running
+if ! pgrep nginx > /dev/null ; then
+  echo "Nginx is not running"
+  exit 1
+fi
+
+# Check if Nginx is listening on port 80
+if ! netstat -lnp | (grep -q :80 && grep -q nginx) ; then
+  echo "Nginx is not listening on port 80"
+
+  # Modify Nginx configuration to listen on port 80 for all active IPv4 IPs
+  sudo sed -i 's/listen\s*80;/listen 80 default_server;/g' /etc/nginx/sites-enabled/default
+
+  # Restart Nginx service
+  sudo service nginx restart
+fi

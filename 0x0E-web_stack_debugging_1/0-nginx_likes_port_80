@@ -1,19 +1,15 @@
-#install net-tools if not installed
-#sudo apt-get update
-#sudo apt-get install -y net-tools
+#!/usr/bin/env bash
+# This script configures Nginx to listen on port 80 of all the server's active IPv4 IPs
 
-# Check if Nginx is running
-if ! pgrep nginx > /dev/null ; then
-  echo "Nginx is not running"
-  exit 1
+# Install Nginx if not already installed
+if ! dpkg -s nginx > /dev/null 2>&1; then
+  apt-get update
+  apt-get install -y nginx
 fi
 
-# Check if Nginx is listening on port 80
-if ! netstat -lnp | (grep -q :80 && grep -q nginx) ; then
-  echo "Nginx is not listening on port 80"
+# Set the listen directive to 80 in the default Nginx configuration file
+#sed -i 's/8080/80/g' /etc/nginx/sites-enabled/default
+sudo ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
 
-  # Modify Nginx configuration to listen on port 80 for all active ipv4 ips
-  sudo sed -i '/listen \[::\]:8080 default_server/ s/8080/ 80/' /etc/nginx/sites-enabled/default
-  # Restart Nginx service
-  sudo service nginx restart
-fi
+# Restart Nginx to apply the changes
+systemctl restart nginx
