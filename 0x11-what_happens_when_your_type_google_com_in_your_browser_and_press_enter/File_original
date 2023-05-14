@@ -1,0 +1,19 @@
+What happens when ou type google.com in your browser and hit enter???
+
+When you type https://google.com into your browser and hit enter, you initiate a series of complex processes that allow your computer to communicate with Google's servers and display its web pages on your screen. To achieve this, your browser relies on a number of different components, each playing a crucial role in ensuring smooth communication between your computer and Google's servers. 
+
+Firstly, to identify Google's servers on the internet, your browser needs to know its IP address, which is a numeric code assigned to each computer connected to the internet. However, since IP addresses are difficult for humans to remember, domain names such as google.com are used instead. To translate the human-readable domain name into a machine-readable IP address, your browser sends a DNS request to a DNS server, which then returns the corresponding IP address to your browser.
+
+Once your browser knows the IP address of Google's server, it establishes a TCP/IP connection with the server, using a set of protocols that define how data is transmitted over the internet. At this stage, your browser also checks its cache to see if it has the IP address already saved, and if not, sends a request to the operating system (OS), which then sends a request to the DNS resolver to obtain the IP address.
+
+The DNS resolver, which is typically provided by your internet service provider (ISP), uses a hierarchical system to find the IP address of the domain name. It starts by contacting the root server, which is responsible for maintaining information about all top-level domains (TLDs), such as .com, .net, and .org. The root server then directs the resolver to the appropriate TLD server, which in turn directs it to the name servers of the domain name.
+
+The name servers are responsible for storing information about the domain name's IP address, and may also include load balancers that distribute requests across multiple servers for improved efficiency. The resolver obtains the IP address from the name server and returns it to the OS, which then sends it back to your browser.
+
+To protect Google's servers from unauthorized access, they are typically equipped with a firewall that filters incoming traffic and blocks any unauthorized requests. Your browser needs to establish a secure connection with the server to ensure that your data is transmitted securely and cannot be intercepted by third parties. This is achieved through the use of HTTPS, which encrypts all data transmitted between your browser and Google's server.
+
+To establish a secure connection, your browser performs an SSL handshake with the server, during which the server sends an SSL certificate containing a public key to your browser. This public key is then used by your browser to decrypt the data transmitted by the server.
+
+Google's website contains thousands of pages, and storing them all statically would require an enormous amount of space. To handle this, Google uses dynamic web servers that generate web pages on the fly. The web server requests data from an application server, which retrieves the required information from a database and generates the webpage. This generated webpage is then sent back to your browser as an HTML document, along with any associated styles and scripts.
+
+Finally, your browser may also store information about the website, such as cookies and browsing history, to optimize future requests to the same website. All of these processes happen in a matter of milliseconds, allowing you to access Google's website quickly and easily.
