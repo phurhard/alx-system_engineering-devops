@@ -1,0 +1,3 @@
+sudo ufw status
+sudo ufw enable
+sudo ufw redirect 8080 80
