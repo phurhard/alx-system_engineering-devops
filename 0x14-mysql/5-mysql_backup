@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# This bash scripts generates an sql dump
+Mysql_Root_Password="$1"
+#Generates the sql dump
+mysqldump -uroot -p"$Mysql_Root_Password" --single-transaction --lock-tables=false --all-databases >backup.sql
+#compress thesql dump file to .tar.gz
+tar -czf "$(date +'%d-%m-%Y').tar.gz" backup.sql
