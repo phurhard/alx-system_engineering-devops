@@ -18,7 +18,7 @@ if __name__ == "__main__":
         users = json.loads(users)
         for user in users:
             if (user.get('id') == userId):
-                userName = user.get('name')
+                userName = user.get('username')
     with url.urlopen("https://jsonplaceholder.typicode.com/todos") as req:
         contents = req.read()
         contents.decode('utf-8')
@@ -29,10 +29,10 @@ if __name__ == "__main__":
             if (item.get('userId') == userId):
                 userTodo.append(item)
         for task in userTodo:
-            csvData.append([task.get('userId'),
-                            userName,
-                            task.get('completed'),
-                            task.get('title')])
+            csvData.append([f'"{task.get("userId")}"',
+                            f'"{userName}"',
+                            f'"{task.get("completed")}"',
+                            f'"{task.get("title")}"'])
         csv_filename = f"{userId}.csv"
         with open(csv_filename, 'w', newline='') as file:
             writer = csv.writer(file)
