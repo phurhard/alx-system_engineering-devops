@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 '''This script gathers data about eployees from an api'''
+import json
 import urllib.request as url
 import sys
-import json
 
 
 if __name__ == "__main__":
@@ -32,7 +32,7 @@ if __name__ == "__main__":
         for task in userTodo:
             if (task.get('completed') is True):
                 NODT = NODT + 1
-        print(f"Employee {userName} is done with tasks ({NODT}/{TNOT}):")
+        print(f"Employee {userName} is done with tasks({NODT}/{TNOT}):")
         for item in userTodo:
             if (item.get('completed') is True):
                 print(f"\t {item.get('title')}")
