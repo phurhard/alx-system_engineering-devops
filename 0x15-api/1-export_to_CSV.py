@@ -8,9 +8,9 @@ import urllib.request as url
 
 if __name__ == "__main__":
     ''' this script is not executd when imported'''
-    userId = sys.argv[1]
-    userId = int(userId)
+    userId = int(sys.argv[1])
     userTodo = []
+    csvData = []
     userName = ""
     with url.urlopen("https://jsonplaceholder.typicode.com/users") as res:
         users = res.read()
@@ -28,12 +28,7 @@ if __name__ == "__main__":
         for item in contents:
             if (item.get('userId') == userId):
                 userTodo.append(item)
-        TNOT = len(userTodo)
-        NODT = 0
-        csvData = []
         for task in userTodo:
-            if (task.get('completed') is True):
-                NODT = NODT + 1
             csvData.append([task.get('userId'),
                             userName,
                             task.get('completed'),
