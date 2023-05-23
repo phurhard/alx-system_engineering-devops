@@ -7,16 +7,33 @@ import sys
 
 if __name__ == "__main__":
     ''' this script is not executd when imported'''
-    userId = int(sys.argv[1])
     todoURL = "https://jsonplaceholder.typicode.com/todos"
-    usersURL = "https://jsonplaceholder.typicode.com/users/" + sys.argv[1]
+    usersURL = "https://jsonplaceholder.typicode.com/users"
     user = requests.get(usersURL)
     if user.status_code == 200:
-        user = user.json()
-        username = user.get("username")
+        users = user.json()
         todo = requests.get(todoURL)
         todo_json = todo.json()
-    userdict = {}
+        user_dict={}
+        for user in users:
+            username = user.get("username")
+            user_id = user.get("id")
+            lst = []
+            for todos in todo_json:
+                if todos.get("userId") == user_id:
+                    lst.append({
+                        "username": username,
+                        "task": todos.get("title"),
+                        "completed": todos.get("completed")
+                        })
+            print(f'{user_id}: {lst}')
+            user_dict[f'{user_id}'] = lst
+
+
+        file = "todo_all_employees.json"
+        with open(file, 'w') as wr:
+            wr.write(json.dumps(user_dict))
+    '''userdict = {}
     userlist = []
     lst = []
     for item in todo_json:
@@ -33,4 +50,5 @@ if __name__ == "__main__":
     # print(userdict)
     file = f'{userId}' + '.json'
     with open(file, 'w') as wr:
-        wr.write(json.dumps(userdict))
+        wr.write(json.dumps(userdict))'''
+
