@@ -29,13 +29,12 @@ if __name__ == "__main__":
             if (item.get('userId') == userId):
                 userTodo.append(item)
         for task in userTodo:
-            csvData.append([f'"{task.get("userId")}"',
-                            f'"{userName}"',
-                            f'"{task.get("completed")}"',
-                            f'"{task.get("title")}"'])
+            csvData.append([task.get("userId"),
+                            userName,
+                            str(task.get("completed")),
+                            task.get('title')])
+
         csv_filename = f"{userId}.csv"
         with open(csv_filename, 'w', newline='') as file:
-            writer = csv.writer(file)
-            ''' writer.writerow(["USER_ID", "USERNAME",
-            "TASK_COMPLETED_STATUS", "TASK_TITLE"])'''
+            writer = csv.writer(file, quoting=csv.QUOTE_ALL, delimiter=',')
             writer.writerows(csvData)
