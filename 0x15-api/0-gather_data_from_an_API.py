@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 '''This script gathers data about eployees from an api'''
 import json
-import urllib.request as url
 import sys
+import urllib.request as url
 
 
 if __name__ == "__main__":
