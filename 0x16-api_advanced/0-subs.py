@@ -6,6 +6,7 @@ import requests
 
 redirect = [301, 302]
 
+
 def number_of_subscribers(subreddit):
     """ Returns the number of subscribers for the given subreddit"""
     api = f"https://www.reddit.com/r/{subreddit}/about.json"
@@ -16,7 +17,6 @@ def number_of_subscribers(subreddit):
     res.raise_for_status()
     if res.status_code in redirect:
         '''check if redirect'''
-        
         return 0
     else:
         response = res.json()
