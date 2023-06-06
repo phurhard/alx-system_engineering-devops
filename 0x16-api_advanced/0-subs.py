@@ -14,8 +14,8 @@ def number_of_subscribers(subreddit):
     headers = {"User-Agent": "phurhard"}
 
     res = requests.get(api, allow_redirects=False, headers=headers)
-    res.raise_for_status()
-    if res.status_code in redirect:
+    
+    if res.status_code != 200:
         '''check if redirect'''
         return 0
     else:
