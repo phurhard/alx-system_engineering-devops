@@ -1,7 +1,6 @@
 #!/usr/bin/python3
-""" This is an api call function that uses the reddit api endpoints
-to make API calls
-"""
+""" A module to make API calls to Reddit API endpoints and use the response
+to complete different tasks."""
 import requests
 
 redirect = [301, 302]

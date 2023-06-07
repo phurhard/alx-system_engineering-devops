@@ -1,6 +1,6 @@
 #!/usr/bin/python3
-'''Prints top ten hot post for a given subreddit'''
-
+""" Amodule to make API calls to Reddit API endpoints
+this module takes the respo se amd parses it as deemed fit: """
 import requests
 
 
