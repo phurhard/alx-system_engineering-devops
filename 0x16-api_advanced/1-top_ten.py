@@ -14,10 +14,8 @@ def top_ten(subreddit):
         
         # Raise an exception if the request was not successful
         data = response.json()  # Parse the response JSON data
-        if res.status_code != 200:
-            return None
-        for post in data['data']['children'][:10]:
-            title = post['data']['title']
+        for post in data.get('data').get('children')[:10]:
+            title = post('data')('title')
             print(title)
-    except requests.exceptions.RequestException as e:
-        return None
+    except Exception as e:
+        print(f"None {e}")
