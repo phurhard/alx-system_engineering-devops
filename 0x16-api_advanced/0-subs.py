@@ -1,6 +1,5 @@
 #!/usr/bin/python3
-""" A module to make API calls to Reddit API endpoints and use the response
-to complete different tasks."""
+'''A module rewritte just in case'''
 import requests
 
 redirect = [301, 302]
