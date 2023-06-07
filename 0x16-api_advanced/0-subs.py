@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """ This is an api call function
-that uses the reddit api endpoints to make calls
-"""
+that uses the reddit api endpoints to make calls"""
 import requests
 
 redirect = [301, 302]
@@ -13,7 +12,7 @@ def number_of_subscribers(subreddit):
 
     headers = {"User-Agent": "phurhard"}
 
-    res = requests.get(api, allow_redirects=False, headers=headers)
+    res = requests.get(api, headers=headers)
     try:
         response = res.json()
         subscr = response.get('data').get('subscribers')
