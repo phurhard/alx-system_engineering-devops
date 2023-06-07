@@ -1,8 +1,8 @@
 #!/usr/bin/python3
-'''A module rewritte just in case'''
+""" A module which makes API calls to the Reddit API endpoints
+and using the response for further manipulation:
+"""
 import requests
-
-redirect = [301, 302]
 
 
 def number_of_subscribers(subreddit):
@@ -14,7 +14,7 @@ def number_of_subscribers(subreddit):
     try:
         res = requests.get(api, headers=headers)
         response = res.json()
-        subscr = response.get('data').get('subscribers')
+        subscr = response['data']['subscribers']
         return subscr
     except Exception:
         return 0
