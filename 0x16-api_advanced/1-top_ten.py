@@ -1,21 +1,23 @@
 #!/usr/bin/python3
-""" Amodule to make API calls to Reddit API endpoints
-this module takes the respo se amd parses it as deemed fit: """
+""" A module to make API calls to Reddit API endpoints
+"""
+
 import requests
 
 
 def top_ten(subreddit):
-    '''Top ten titles in a subreddit'''
-    url = f"https://www.reddit.com/r/{subreddit}/hot/.json"
+    """ Returns a list of to ten titles in the hot list of a subreddit
+    """
+
+    url = "https://www.reddit.com/r/{}/hot.json?limit=10".format(subreddit)
     headers = {"User-Agent": "phurhard"}
 
     try:
-        response = requests.get(url, headers=headers, allow_redirects=False)
-        
-        # Raise an exception if the request was not successful
-        data = response.json()  # Parse the response JSON data
-        for post in data.get('data').get('children')[:10]:
-            title = post('data')('title')
-            print(title)
+        res = requests.get(url, headers=headers)
+        data = res.json()
+
+        children = data.get('data').get('children')
+        for post in children:
+            print(post.get('data').get('title'))
     except Exception as e:
-        print(f"None {e}")
+        print("None")
