@@ -1,22 +1,34 @@
-#!/usr/bin/python3
-'''Returns a list containing titles for all hot articles for a given subreddit'''
+#!/usr/bin/python
+""" A module for sending requests to Reddit API endpoints
+"""
 
 import requests
 
-def top_ten(subreddit):
-    url = f"https://www.reddit.com/r/{subreddit}/hot/.json"
+
+def recurse(subreddit, hot_list=[]):
+    """ Uses recursion to print out all the titles in the hot section for a given subreddit
+    """
+    
     headers = {"User-Agent": "phurhard"}
 
     try:
-        response = requests.get(url, headers=headers, allow_redirects=False)
-        response.raise_for_status()  # Raise an exception if the request was not successful
-        data = response.json()  # Parse the response JSON data
-
-        # Here, i'll print the titles of the first hot 10 posts in the subreddit
-        for post in data['data']['children'][:10]:
-            title = post['data']['title']
-            print(title)
-
-
-    except requests.exceptions.RequestException as e:
-        print("None")
+        if not hot_list:
+            url = "https://www.reddit.com/r/{}/hot.json?limit=25".format(subreddit)
+        else:
+            last_post = hot_list[-1]
+            after = last_post['data']['name']
+            url = "https://ww.reddit.com/r/{}/hot.json?limit=25&after={}".format(subreddit, after)
+        res = requests.get(url, headers=headers)
+        data = res.json()
+        posts = data['data']['children']
+        
+        for post in posts:
+            hot_list.append(post['data']['title'])
+        after = data['data']['after']
+        print(len(hot_list))
+        if after:
+            recurse(subreddit, hot_list)
+            print('After each recurse: {}'.format(len(hot_list)))
+#        return hot_list
+    except Exception as e:
+        return None
