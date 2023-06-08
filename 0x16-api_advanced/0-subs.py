@@ -1,20 +1,19 @@
 #!/usr/bin/python3
-""" A module which makes API calls to the Reddit API endpoints
-and using the response for further manipulation:
+""" This a module that uses the Reddit API to make API calls to its Endpoint
 """
+
 import requests
 
 
 def number_of_subscribers(subreddit):
-    """ Returns the number of subscribers for the given subreddit"""
-    api = f"https://www.reddit.com/r/{subreddit}/about.json"
-
+    """ Returns the number of subscribers for a given subreddit"""
+    url = "https://www.reddit.com/r/{}/about.json".format(subreddit)
     headers = {"User-Agent": "phurhard"}
 
     try:
-        res = requests.get(api, headers=headers)
-        response = res.json()
-        subscr = response['data']['subscribers']
-        return subscr
-    except Exception:
+        response = requests.get(url, headers=headers)
+        data = response.json()
+        subscribers = data["data"]["subscribers"]
+        return subscribers
+    except Exception as e:
         return 0
