@@ -1,3 +1,4 @@
+# Modifies the nginx default file descriptor
 $file_path = '/etc/default/nginx'  # Specify the path to the file you want to modify
 
 # Backup the original file
