@@ -15,6 +15,6 @@ file { $file_path:
 }
 
 exec { 'reload_service':
-  command     => 'service your_service_name restart',
+  command     => 'service nginx restart',
   refreshonly => true,
 }
