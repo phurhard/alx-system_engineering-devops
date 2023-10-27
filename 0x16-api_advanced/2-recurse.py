@@ -16,7 +16,7 @@ def recurse(subreddit, hot_list=None, after=None):
     """
     if hot_list is None:
         hot_list = []
-    url = 'https://www.reddit.com/r/{}/hot.json'.format(subreddit)
+    url = f'https://www.reddit.com/r/{subreddit}/hot.json'
     params = {
             "limit": 100,
             "raw_json": 1,
@@ -29,21 +29,20 @@ def recurse(subreddit, hot_list=None, after=None):
     }
     response = requests.get(url, params=params, headers=headers,
                             allow_redirects=False)
-    if response.status_code == 200:
-        data = response.json()
-        posts = (data['data']['children'])
-        if not posts:
-            return hot_list
-
-        for post in posts:
-            hot_list.append(post['data']['title'])
-        after = data['data']['after']
-        if after:
-            return recurse(subreddit, hot_list=hot_list, after=after)
-        else:
-            return (hot_list)
-    else:
+    if response.status_code != 200:
         return (None)
+    data = response.json()
+    posts = (data['data']['children'])
+    if not posts:
+        return hot_list
+
+    for post in posts:
+        hot_list.append(post['data']['title'])
+    return (
+        recurse(subreddit, hot_list=hot_list, after=after)
+        if (after := data['data']['after'])
+        else hot_list
+    )
 =======
 #!/usr/bin/python
 """ A module for sending requests to Reddit API endpoints
@@ -75,8 +74,7 @@ def recurse(subreddit, hot_list=[]):
         print(len(hot_list))
         if after:
             recurse(subreddit, hot_list)
-            print('After each recurse: {}'.format(len(hot_list)))
-#        return hot_list
+            print(f'After each recurse: {len(hot_list)}')
     except Exception as e:
         return None
 >>>>>>> a793971a290eddd62e079676fde38c21160bca4f

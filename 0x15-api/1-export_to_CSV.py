@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 '''This script gathers data about eployees from an api'''
+
 import csv
 import json
 import sys
@@ -25,15 +26,16 @@ if __name__ == "__main__":
         contents = json.loads(contents)
         # contents is a list having all todos
         # so we'll loop thrpugh the list
-        for item in contents:
-            if (item.get('userId') == userId):
-                userTodo.append(item)
-        for task in userTodo:
-            csvData.append([task.get("userId"),
-                            userName,
-                            str(task.get("completed")),
-                            task.get('title')])
-
+        userTodo.extend(item for item in contents if (item.get('userId') == userId))
+        csvData.extend(
+            [
+                task.get("userId"),
+                userName,
+                str(task.get("completed")),
+                task.get('title'),
+            ]
+            for task in userTodo
+        )
         csv_filename = f"{userId}.csv"
         with open(csv_filename, 'w', newline='') as file:
             writer = csv.writer(file, quoting=csv.QUOTE_ALL, delimiter=',')
