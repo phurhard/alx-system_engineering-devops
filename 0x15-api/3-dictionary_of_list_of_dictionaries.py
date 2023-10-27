@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 '''This script gathers data about employees from an api'''
+
 import json
 import requests
 import sys
@@ -18,14 +19,15 @@ if __name__ == "__main__":
         for user in users:
             username = user.get("username")
             user_id = user.get("id")
-            lst = []
-            for todos in todo_json:
-                if todos.get("userId") == user_id:
-                    lst.append({
-                        "username": username,
-                        "task": todos.get("title"),
-                        "completed": todos.get("completed")
-                        })
+            lst = [
+                {
+                    "username": username,
+                    "task": todos.get("title"),
+                    "completed": todos.get("completed"),
+                }
+                for todos in todo_json
+                if todos.get("userId") == user_id
+            ]
             user_dict[f'{user_id}'] = lst
 
         file = "todo_all_employees.json"

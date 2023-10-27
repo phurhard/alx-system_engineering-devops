@@ -7,13 +7,12 @@ import requests
 
 def number_of_subscribers(subreddit):
     """ Returns the number of subscribers for a given subreddit"""
-    url = "https://www.reddit.com/r/{}/about.json".format(subreddit)
+    url = f"https://www.reddit.com/r/{subreddit}/about.json"
     headers = {"User-Agent": "phurhard"}
 
     try:
         response = requests.get(url, headers=headers)
         data = response.json()
-        subscribers = data["data"]["subscribers"]
-        return subscribers
+        return data["data"]["subscribers"]
     except Exception as e:
         return 0

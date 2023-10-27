@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 '''This script gathers data about eployees from an api'''
+
 import json
 import sys
 import urllib.request as url
@@ -24,9 +25,7 @@ if __name__ == "__main__":
         contents = json.loads(contents)
         # contents is a list having all todos
         # so we'll loop thrpugh the list
-        for item in contents:
-            if (item.get('userId') == userId):
-                userTodo.append(item)
+        userTodo.extend(item for item in contents if (item.get('userId') == userId))
         TNOT = len(userTodo)
         NODT = 0
         for task in userTodo:
